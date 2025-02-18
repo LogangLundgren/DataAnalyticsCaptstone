@@ -1,46 +1,48 @@
 import cv2
 import mediapipe as mp
-import time
 
-# Initialize MediaPipe Pose model
+# Path to a test video from your dataset
+VIDEO_PATH = r"C:\Users\LongboyLog\DataAnalyticsCaptstone\barbell biceps curl\barbell biceps curl_1.mp4"
+
+# Initialize MediaPipe Pose Detection
 mp_pose = mp.solutions.pose
-mp_draw = mp.solutions.drawing_utils
 pose = mp_pose.Pose()
 
-# Load the video file
-video_path = r"C:\Users\LongboyLog\DataAnalyticsCaptstone\IMG_9108.mp4"  # Ensure the correct file extension (.mp4, .avi, etc.)
-cap = cv2.VideoCapture(video_path)
+# OpenCV video capture
+def play_video(video_path):
+    cap = cv2.VideoCapture(video_path)
 
-# Performance tracking
-prev_time = 0
+    while cap.isOpened():
+        ret, frame = cap.read()
 
-while cap.isOpened():
-    success, frame = cap.read()
-    if not success:
-        break
+        if not ret:
+            print("Video finished or failed to load. Press 'R' to replay or 'Q' to quit.")
+            break
 
-    # Convert frame to RGB (MediaPipe requires RGB format)
-    img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    results = pose.process(img_rgb)
+        # Convert frame to RGB for MediaPipe
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    # Draw landmarks
-    if results.pose_landmarks:
-        mp_draw.draw_landmarks(frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+        # Process with MediaPipe
+        results = pose.process(rgb_frame)
 
-    # Calculate FPS
-    curr_time = time.time()
-    fps = 1 / (curr_time - prev_time)
-    prev_time = curr_time
+        # Draw keypoints if detected
+        if results.pose_landmarks:
+            mp.solutions.drawing_utils.draw_landmarks(
+                frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS
+            )
 
-    # Display FPS on the frame
-    cv2.putText(frame, f"FPS: {int(fps)}", (10, 50),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        # Show the video
+        cv2.imshow("Workout Video", frame)
 
-    # Show the output
-    cv2.imshow("MediaPipe Pose Test - Video File", frame)
+        # Key press events: 'R' to replay, 'Q' to quit
+        key = cv2.waitKey(10) & 0xFF
+        if key == ord('q'):
+            break
+        elif key == ord('r'):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Restart video
 
-    if cv2.waitKey(10) & 0xFF == ord('q'):
-        break
+    cap.release()
+    cv2.destroyAllWindows()
 
-cap.release()
-cv2.destroyAllWindows()
+# Run the function
+play_video(VIDEO_PATH)
