@@ -45,7 +45,9 @@ Next steps:
 1)Connect GitHub repo to Azure ML for automated workflows
 
 2) Extract Keypoint Data and Save as CSV
+
    Write a script to extract joint positions per frame.
+   
    Save this data in a structured format (CSV or JSON).
 
 3)Engineer Features for Training
@@ -53,7 +55,10 @@ Next steps:
 
 4)Train the CNN Model
    Use TensorFlow/PyTorch to train a CNN on extracted pose data.
-   Goal: The model should classify exercises correctly.
+
+Current Output: a video with key features tracked, that saves the new video in a folder called processed videos. 
+
+Goal: Extract the aforementioned features, and use them to train a CNN to classify which exercise is being performed.
 
 
 running the code: 
@@ -70,5 +75,4 @@ pip install -r requirements.txt
 
 python test_mediapipe.py
 
-Current Output: a video with key features tracked, that saves the new video in a folder called processed videos. 
 
