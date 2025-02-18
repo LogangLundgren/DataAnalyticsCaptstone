@@ -22,3 +22,11 @@ Dataset Limitations: Expanding data through augmentation.
 Generalization: Ensuring the model performs well across diverse users.
 Deployment Considerations: Optimizing for speed and accuracy.
 Future Enhancements: Adding pose correction suggestions and form grading.
+
+
+updates:
+
+1) I created a script and tested the mediapipe model and got it to run. I tested it on a video of me posing.
+2) Created a compute instance in Azure Machine Learning
+3) Set up Azure Storage for dataset uploads
+4) Next steps: Connect GitHub repo to Azure ML for automated workflows  
