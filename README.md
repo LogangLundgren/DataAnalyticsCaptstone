@@ -12,7 +12,7 @@ Deploy the model for easy access via a web or mobile interface.
 
 
 4. Dataset & Data Preprocessing
-5. 
+
 Dataset: WorkoutFitness Video Dataset
 
 Feature Extraction: Utilizing OpenCV and MediaPipe for keypoint detection.
@@ -30,15 +30,6 @@ Training: Using TensorFlow/Keras with augmentation techniques.
 
 Evaluation Metrics: Accuracy, precision, recall, and F1-score.
 
-9. Challenges & Next Steps
-    
-Dataset Limitations: Expanding data through augmentation.
-
-Generalization: Ensuring the model performs well across diverse users and video qualities.
-
-Deployment Considerations: Optimizing for speed and accuracy.
-
-Future Enhancements: Adding pose correction suggestions and form grading.
 
 
 updates:
@@ -53,11 +44,16 @@ updates:
 Next steps: 
 1)Connect GitHub repo to Azure ML for automated workflows
 
-2)update the script to pull the XYZ coordinates from the videos in the dataset 
+2) Extract Keypoint Data and Save as CSV
+   Write a script to extract joint positions per frame.
+   Save this data in a structured format (CSV or JSON).
 
-3)Store that data
+3)Engineer Features for Training
+   Compute joint angles, speed, and repetitions.
 
-4)Learn how to incorporate /// use that data to assist the CNN model 
+4)Train the CNN Model
+   Use TensorFlow/PyTorch to train a CNN on extracted pose data.
+   Goal: The model should classify exercises correctly.
 
 
 running the code: 
@@ -73,4 +69,6 @@ venv\Scripts\activate
 pip install -r requirements.txt
 
 python test_mediapipe.py
+
+Current Output: a video with key features tracked, that saves the new video in a folder called processed videos. 
 
