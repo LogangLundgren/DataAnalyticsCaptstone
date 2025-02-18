@@ -37,3 +37,6 @@ run the following in powershell as admin (this is obviously my file path, change
 cd "C:\Users\LongboyLog\DataAnalyticsCaptstone"
 python -m venv venv
 venv\Scripts\activate
+pip install -r requirements.txt
+python test_mediapipe.py
+
