@@ -30,3 +30,10 @@ updates:
 2) Created a compute instance in Azure Machine Learning
 3) Set up Azure Storage for dataset uploads
 4) Next steps: Connect GitHub repo to Azure ML for automated workflows  
+
+
+running the code: 
+run the following in powershell as admin (this is obviously my file path, change based on yours. Yes thats my gamertag/username)
+cd "C:\Users\LongboyLog\DataAnalyticsCaptstone"
+python -m venv venv
+venv\Scripts\activate
