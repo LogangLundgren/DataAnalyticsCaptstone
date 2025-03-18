@@ -1,0 +1,45 @@
+-- 1. Create 'exercises' table to store unique exercise names CREATE TABLE exercises ( exercise_id SERIAL PRIMARY KEY, exercise_name TEXT UNIQUE NOT NULL ); 
+
+-- 2. Create 'videos' table to store video metadata CREATE TABLE videos ( video_id UUID DEFAULT gen_random_uuid() PRIMARY KEY, file_name TEXT NOT NULL, file_path TEXT NOT NULL, exercise_id INT REFERENCES exercises(exercise_id) ON DELETE CASCADE, uploaded_at TIMESTAMP DEFAULT now(), frame_count INT, duration_seconds FLOAT ); 
+
+-- 3. Create 'video_frames' table to store pose keypoints for each frame CREATE TABLE video_frames ( frame_id SERIAL PRIMARY KEY, video_id UUID REFERENCES videos(video_id) ON DELETE CASCADE, frame_number INT NOT NULL, timestamp_seconds FLOAT NOT NULL, 
+
+-- Pose keypoints (x, y, z, visibility) for 33 body landmarks 
+x0 FLOAT, y0 FLOAT, z0 FLOAT, visibility0 FLOAT, 
+x1 FLOAT, y1 FLOAT, z1 FLOAT, visibility1 FLOAT, 
+x2 FLOAT, y2 FLOAT, z2 FLOAT, visibility2 FLOAT, 
+x3 FLOAT, y3 FLOAT, z3 FLOAT, visibility3 FLOAT, 
+x4 FLOAT, y4 FLOAT, z4 FLOAT, visibility4 FLOAT, 
+x5 FLOAT, y5 FLOAT, z5 FLOAT, visibility5 FLOAT, 
+x6 FLOAT, y6 FLOAT, z6 FLOAT, visibility6 FLOAT, 
+x7 FLOAT, y7 FLOAT, z7 FLOAT, visibility7 FLOAT, 
+x8 FLOAT, y8 FLOAT, z8 FLOAT, visibility8 FLOAT, 
+x9 FLOAT, y9 FLOAT, z9 FLOAT, visibility9 FLOAT, 
+x10 FLOAT, y10 FLOAT, z10 FLOAT, visibility10 FLOAT, 
+x11 FLOAT, y11 FLOAT, z11 FLOAT, visibility11 FLOAT, 
+x12 FLOAT, y12 FLOAT, z12 FLOAT, visibility12 FLOAT, 
+x13 FLOAT, y13 FLOAT, z13 FLOAT, visibility13 FLOAT, 
+x14 FLOAT, y14 FLOAT, z14 FLOAT, visibility14 FLOAT, 
+x15 FLOAT, y15 FLOAT, z15 FLOAT, visibility15 FLOAT, 
+x16 FLOAT, y16 FLOAT, z16 FLOAT, visibility16 FLOAT, 
+x17 FLOAT, y17 FLOAT, z17 FLOAT, visibility17 FLOAT, 
+x18 FLOAT, y18 FLOAT, z18 FLOAT, visibility18 FLOAT, 
+x19 FLOAT, y19 FLOAT, z19 FLOAT, visibility19 FLOAT, 
+x20 FLOAT, y20 FLOAT, z20 FLOAT, visibility20 FLOAT, 
+x21 FLOAT, y21 FLOAT, z21 FLOAT, visibility21 FLOAT, 
+x22 FLOAT, y22 FLOAT, z22 FLOAT, visibility22 FLOAT, 
+x23 FLOAT, y23 FLOAT, z23 FLOAT, visibility23 FLOAT, 
+x24 FLOAT, y24 FLOAT, z24 FLOAT, visibility24 FLOAT, 
+x25 FLOAT, y25 FLOAT, z25 FLOAT, visibility25 FLOAT, 
+x26 FLOAT, y26 FLOAT, z26 FLOAT, visibility26 FLOAT, 
+x27 FLOAT, y27 FLOAT, z27 FLOAT, visibility27 FLOAT, 
+x28 FLOAT, y28 FLOAT, z28 FLOAT, visibility28 FLOAT, 
+x29 FLOAT, y29 FLOAT, z29 FLOAT, visibility29 FLOAT, 
+x30 FLOAT, y30 FLOAT, z30 FLOAT, visibility30 FLOAT, 
+x31 FLOAT, y31 FLOAT, z31 FLOAT, visibility31 FLOAT, 
+x32 FLOAT, y32 FLOAT, z32 FLOAT, visibility32 FLOAT 
+  
+
+); 
+
+ 
