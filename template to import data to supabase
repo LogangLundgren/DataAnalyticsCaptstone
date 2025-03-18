@@ -1,0 +1,30 @@
+import pandas as pd
+from supabase import create_client, Client
+import os
+
+# Supabase credentials
+SUPABASE_URL = "https://your-supabase-url.supabase.co"
+SUPABASE_KEY = "your-supabase-service-role-key"
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# Folder containing CSV files
+folder_path = "/path_to_your_local_data"
+
+# Iterate through all CSV files in the folder
+for file_name in os.listdir(folder_path):
+    if file_name.endswith(".csv"):
+        file_path = os.path.join(folder_path, file_name)
+        
+        # Read CSV
+        df = pd.read_csv(file_path)
+
+        # Convert DataFrame to dictionary
+        data_dict = df.to_dict(orient="records")
+
+        # Upload to Supabase
+        response = supabase.table("exercise_data").insert(data_dict).execute()
+
+        if response.get("status_code") == 201:
+            print(f"✅ {file_name} uploaded successfully.")
+        else:
+            print(f"❌ Error uploading {file_name}: {response.get('error')}")
